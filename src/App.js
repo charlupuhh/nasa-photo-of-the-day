@@ -6,6 +6,7 @@ import Header from './Header'
 import Image from './Image'
 import variables from './secret'
 
+
 function App() {
   var mykey = variables.MY_KEY;
   const [apiData, setAPIData] = useState({})
@@ -28,6 +29,7 @@ function App() {
   return (
     <div className="App">
       <Header />
+
       <Image data={apiData} />
     </div>
   );
