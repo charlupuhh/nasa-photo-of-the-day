@@ -1,13 +1,36 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import axios from 'axios'
 import "./App.css";
 
+import Header from './Header'
+import Image from './Image'
+import variables from './secret'
+
+
 function App() {
+  var mykey = variables.MY_KEY;
+  const [apiData, setAPIData] = useState({})
+  useEffect(() => {
+    axios.get(`https://api.nasa.gov/planetary/apod?api_key=${mykey}`)
+     .then(res => {
+       setAPIData(res.data)
+     })
+     .catch(err => {
+       console.log(`There's an error of ${err}`)
+     })
+  }, [])
+
+  useEffect(() => {
+    console.log('It works')
+  },[])
+
+  console.log(apiData)
+
   return (
     <div className="App">
-      <p>
-        Read through the instructions in the README.md file to build your NASA
-        app! Have fun <span role="img" aria-label='go!'>🚀</span>!
-      </p>
+      <Header />
+
+      <Image data={apiData} />
     </div>
   );
 }
